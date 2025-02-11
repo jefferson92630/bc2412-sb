@@ -1,4 +1,4 @@
-package com.bootcamp.demo.demo_sb_restful.controller;
+package com.bootcamp.demo.demo_sb_restful.controller.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import com.bootcamp.demo.demo_sb_restful.controller.CatOperation;
 import com.bootcamp.demo.demo_sb_restful.model.Cat;
 import com.bootcamp.demo.demo_sb_restful.model.CatDatabase;
 import com.bootcamp.demo.demo_sb_restful.service.CatService;
@@ -21,9 +23,8 @@ import com.bootcamp.demo.demo_sb_restful.service.CatService;
 
 // Controller -> The ways to control Cat resource
 // insert, update, delete, select
-@Controller
-@ResponseBody
-public class CatController {
+@RestController
+public class CatController implements CatOperation {
   // Controller -> Service -> CatDatabase
 
   // Dependency Injection (Spring Core Concept)
@@ -35,13 +36,12 @@ public class CatController {
   private CatService catService;
 
   // Constructor Injection
-  public CatController(CatService catService) {
-    this.catService = catService;
-  }
+ // public CatController(CatServiceImpl catService) {
+ //   this.catService = catService;
+ // }
 
-  // insert
-  @PostMapping(value = "/cat")
-  public Cat createCat(@RequestBody Cat cat) {
+@Override
+  public Cat createCat(Cat cat) {
     if (this.catService.put(cat)) // Null pointer exception?
       return cat;
     return null;
@@ -59,24 +59,24 @@ public class CatController {
   // http://localhost:8082/cat?id=1
   // Deserialization
   @GetMapping(value = "/cat")
-  public Cat getCat(@RequestParam Long id) {
+  public Cat getCat(Long id) {
     return CatDatabase.find(id).orElse(null);
   }
 
   // http://localhost:8082/cat?id=1
   @DeleteMapping(value = "/cat")
-  public Boolean deleteCat(@RequestParam Long id) {
+  public Boolean deleteCat(Long id) {
     return CatDatabase.delete(id);
   }
 
   // HashMap.put() -> if exists, override, otherwise, create new
   @PutMapping(value = "/cat")
-  public Boolean updateCat(@RequestParam Long id, @RequestBody Cat cat) {
+  public Boolean updateCat(Long id, Cat cat) {
     return CatDatabase.update(id, cat);
   }
 
   @PatchMapping(value = "/cat/name/{name}")
-  public Boolean patchCatName(@RequestParam Long id, @PathVariable String name) {
+  public Boolean patchCatName(Long id, String name) {
     return CatDatabase.patchName(id, name);
   }
 

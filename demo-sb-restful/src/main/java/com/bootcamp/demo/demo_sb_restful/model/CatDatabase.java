@@ -33,7 +33,7 @@ public class CatDatabase {
     return false;
   }
 
-  // ! 1. Don't Create Cat, we should find the cat object, call setName().
+  // ! 1. Don't create Cat, we should find the cat object, call setName().
   // ! 2. Other vales of this cat object remain unchanged.
   public static Boolean patchName(Long catId, String catName) {
     for (Cat cat : HOME) {

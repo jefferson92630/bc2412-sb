@@ -1,0 +1,22 @@
+{
+  "name": "K11",
+  "area": 100000,
+  "cinema": {
+    "name": "ABC",
+    "openedDate": null,
+    "releasedFilms": [
+      {
+        "name": "123",
+        "releaseDate": "2024-10-02"
+      },
+      {
+        "name": "234",
+        "releaseDate": "2025-10-02"
+      }
+    ]
+  },
+  "shopCategory": [
+    "Clothing",
+    "Sport"
+  ]
+}

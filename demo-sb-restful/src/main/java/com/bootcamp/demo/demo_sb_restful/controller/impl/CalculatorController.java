@@ -1,4 +1,4 @@
-package com.bootcamp.demo.demo_sb_restful.controller;
+package com.bootcamp.demo.demo_sb_restful.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootcamp.demo.demo_sb_restful.model.Operation;
-import com.bootcamp.demo.demo_sb_restful.service.CalculatorService;
+import com.bootcamp.demo.demo_sb_restful.service.impl.CalculatorService;
 
 // ! sum -> 1 + 2 -> return 3
 // ! subtract -> 1 - 2 -> return -1
