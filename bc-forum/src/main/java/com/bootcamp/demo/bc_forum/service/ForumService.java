@@ -2,9 +2,10 @@ package com.bootcamp.demo.bc_forum.service;
 
 import java.util.List;
 import java.util.Map;
-import com.bootcamp.demo.bc_forum.service.impl.model.Forum;
-import com.bootcamp.demo.bc_forum.service.impl.model.Forum.Post;
-import com.bootcamp.demo.bc_forum.service.impl.model.Forum.Post.Comment;
+import com.bootcamp.demo.bc_forum.model.Forum;
+import com.bootcamp.demo.bc_forum.model.Forum.Post;
+import com.bootcamp.demo.bc_forum.model.Forum.Post.Comment;
+
 
 public interface ForumService {
   List<Forum> getPostsAndComments();

@@ -1,4 +1,4 @@
-package com.bootcamp.demo.bc_forum.service.impl.model;
+package com.bootcamp.demo.bc_forum.model;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +18,7 @@ public class Forum {
   private String phone;
   private String website;
   private Company company;
-  private List<Post> post;
+  private List<Post> posts;
 
 @Getter
 @Builder
@@ -54,7 +54,7 @@ public class Forum {
     private Long id;
     private String title;
     private String body;
-    private List<Comment> comment;
+    private List<Comment> comments;
 
     @Getter
     @Setter

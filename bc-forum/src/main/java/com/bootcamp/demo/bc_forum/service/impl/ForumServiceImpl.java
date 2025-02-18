@@ -8,10 +8,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.bootcamp.demo.bc_forum.model.Forum;
+import com.bootcamp.demo.bc_forum.model.Forum.Post;
+import com.bootcamp.demo.bc_forum.model.Forum.Post.Comment;
 import com.bootcamp.demo.bc_forum.service.ForumService;
-import com.bootcamp.demo.bc_forum.service.impl.model.Forum;
-import com.bootcamp.demo.bc_forum.service.impl.model.Forum.Post;
-import com.bootcamp.demo.bc_forum.service.impl.model.Forum.Post.Comment;
+
 
 @Service
 public class ForumServiceImpl implements ForumService {
@@ -22,22 +23,22 @@ public class ForumServiceImpl implements ForumService {
   @Override
   public List<Forum> getPostsAndComments() {
     List<Forum> forums = getForums();
-    List<Post> posts = getPosts();
-    List<Comment> comments = getComments();
+    List<Post> postslist = getPosts();
+    List<Comment> commentslist = getComments();
 
-    Map<Long, List<Post>> postsByUserId = posts.stream().collect(Collectors.groupingBy(post -> post.getUserId()));
-    Map<Long, List<Comment>> commentsByPostId = comments.stream().collect(Collectors.groupingBy(comment -> comment.getPostId()));
+    Map<Long, List<Post>> postsByUserId = postslist.stream().collect(Collectors.groupingBy(post -> post.getUserId()));
+    Map<Long, List<Comment>> commentsByPostId = commentslist.stream().collect(Collectors.groupingBy(comment -> comment.getPostId()));
 
     forums.forEach(forum -> {
       List<Post> userPosts = postsByUserId.get(forum.getId());
       if (userPosts != null) {
           userPosts.forEach(post -> {
               List<Comment> postComments = commentsByPostId.get(post.getId());
-              post.setComment(postComments != null ? postComments : List.of());
+              post.setComments(postComments != null ? postComments : List.of());
           });
-          forum.setPost(userPosts);
+          forum.setPosts(userPosts);
       } else {
-          forum.setPost(List.of()); // Set an empty list if no posts
+          forum.setPosts(List.of()); // Set an empty list if no posts
       }
   });
   return forums;
