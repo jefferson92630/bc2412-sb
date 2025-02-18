@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 
 // ! Spring: Convention Over Configuration
@@ -17,6 +18,7 @@ import lombok.Getter;
 @Entity
 @Table(name = "Customers")
 @Getter
+@Builder
 public class CustomerEntity {
   @Id // PK
   @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 // Features of DTO
 // ! 1. Different numbers of fields for the API
@@ -12,6 +13,7 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
   private Long id;
   private String name;
@@ -22,6 +24,7 @@ public class UserDTO {
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
   public static class Address {
     private String street;
     private String suite;
@@ -32,6 +35,7 @@ public class UserDTO {
     @Getter
     @Builder
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class Geo {
       @JsonProperty(value = "latitude")
       private String latitude;

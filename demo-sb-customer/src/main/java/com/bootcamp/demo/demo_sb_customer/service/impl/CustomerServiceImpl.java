@@ -18,6 +18,10 @@ public class CustomerServiceImpl implements CustomerService {
     return this.customerRepository.findAll();
   }
 
+  public List<CustomerEntity> findName(String name) {
+    return this.customerRepository.findByName(CustomerEntity.name);
+  }
+
   @Override
   public CustomerEntity createCustomer(CustomerEntity customerEntity) {
     return customerRepository.save(customerEntity);

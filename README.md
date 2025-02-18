@@ -38,3 +38,15 @@
  - Create impl folder, create implementation for the interface
 - When Controller @Autowired Service, remember to use service interface, but not implementation class
 - test "mvn clean install"
+
+## Week 10/11
+Spring Boot:
+- Restful API (Controller)
+- Database (Repository + Entity)
+- Functions (Service)
+- Additional Beans (Configuration)
+- Invoke external API (RestTemplate)
+- Data Transfer Object (DTO) x Mapper
+- Read Custom Variable from yml (@Value)
+- GlobalExceptionHandler
+- ApiResp.class (enum, SysCode, BusinessException.class)
