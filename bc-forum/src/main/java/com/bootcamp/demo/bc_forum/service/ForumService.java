@@ -1,18 +1,13 @@
 package com.bootcamp.demo.bc_forum.service;
 
 import java.util.List;
-import java.util.Map;
-import com.bootcamp.demo.bc_forum.model.Forum;
-import com.bootcamp.demo.bc_forum.model.Forum.Post;
-import com.bootcamp.demo.bc_forum.model.Forum.Post.Comment;
-
+import com.bootcamp.demo.bc_forum.model.CommentDto;
+import com.bootcamp.demo.bc_forum.model.PostDto;
+import com.bootcamp.demo.bc_forum.model.UserDto;
 
 public interface ForumService {
-  List<Forum> getPostsAndComments();
-  List<Forum> getForums();
-  List<Post> getPosts();
-  List<Comment> getComments();
-  Map<String, Object> userResponse(Long userId);
-  List<Comment> getCommentsByUserId(Long userId);
-  String getUserNameById(Long userId);
+  List<UserDto> getUsers();
+  List<PostDto> getPosts();
+  List<CommentDto> getComments();
+
 }

@@ -1,18 +1,16 @@
 package com.bootcamp.demo.bc_forum.controller;
 
 import java.util.List;
-import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.bootcamp.demo.bc_forum.model.Forum;
-
+import com.bootcamp.demo.bc_forum.dto.UserCommentDTO;
+import com.bootcamp.demo.bc_forum.dto.UserDTO;
 
 public interface ForumOperation {
+  
+  @GetMapping(value = "/users")
+  List<UserDTO> getForumUsers();
 
-  @GetMapping(value = "/forum")
-  List<Forum> getPostsAndComments();
-  
-  @GetMapping(value = "/comments")
-  Map<String, Object> userResponse(@RequestParam Long userId);
-  
+  @GetMapping(value = "comments")
+  List<UserCommentDTO> getCommentsByUserId(@RequestParam String userId);
 }
