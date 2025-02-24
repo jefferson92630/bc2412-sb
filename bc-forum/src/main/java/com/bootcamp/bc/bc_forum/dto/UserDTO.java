@@ -8,9 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
+@Setter
 public class UserDTO {
   private Long id;
   private String name;
@@ -20,11 +20,12 @@ public class UserDTO {
   private String phone;
   private String website;
   private CompanyDTO company;
-  private List<PostDTO> posts;
+  @JsonProperty(value = "posts")
+  private List<PostDTO> postDTOs;
 
-@Getter
-@Builder
-@AllArgsConstructor
+  @Getter
+  @Builder
+  @AllArgsConstructor
   public static class AddressDTO {
     private String street;
     private String suite;
@@ -36,8 +37,10 @@ public class UserDTO {
     @Builder
     @AllArgsConstructor
     public static class GeoDTO {
-      private String lat;
-      private String lng;
+      @JsonProperty(value = "lat")
+      private String latitude;
+      @JsonProperty(value = "lng")
+      private String longitude;
     }
   }
 
@@ -51,20 +54,20 @@ public class UserDTO {
   }
 
   @Getter
-  @Setter
   @Builder
   @AllArgsConstructor
+  @Setter
   public static class PostDTO {
     private Long id;
     private String title;
     private String body;
     @JsonProperty(value = "comments")
-    private List<CommentDTO> commentDtos;
+    private List<CommentDTO> commentDTOs;
 
     @Getter
-    @Setter
     @Builder
     @AllArgsConstructor
+    @Setter
     public static class CommentDTO {
       private Long id;
       private String name;

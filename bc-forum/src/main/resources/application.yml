@@ -1,6 +1,3 @@
-server:
-  port: 8200
-
 api:
   jph:
     host: "jsonplaceholder.typicode.com"

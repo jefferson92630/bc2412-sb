@@ -5,8 +5,8 @@ import com.bootcamp.bc.bc_forum.model.dto.CommentDto;
 import com.bootcamp.bc.bc_forum.model.dto.PostDto;
 import com.bootcamp.bc.bc_forum.model.dto.UserDto;
 
-public interface ForumService {
-  List<UserDto> getUsers();
-  List<PostDto> getPosts();
-  List<CommentDto> getComments();
+public interface JPHService {
+  List<UserDto> getJPHUsers();
+  List<PostDto> getJPHPosts();
+  List<CommentDto> getJPHComments();
 }

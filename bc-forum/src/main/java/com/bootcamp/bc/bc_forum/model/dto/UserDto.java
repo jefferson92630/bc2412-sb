@@ -1,17 +1,17 @@
 package com.bootcamp.bc.bc_forum.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
-    private Long id;
+  private Long id;
   private String name;
   private String username;
   private String email;
@@ -20,10 +20,10 @@ public class UserDto {
   private String website;
   private Company company;
 
-@Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+  @Getter
+  @Builder
+  @AllArgsConstructor
+  @NoArgsConstructor
   public static class Address {
     private String street;
     private String suite;
@@ -36,8 +36,10 @@ public class UserDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Geo {
-      private String lat;
-      private String lng;
+      @JsonProperty(value = "lat")
+      private String latitude;
+      @JsonProperty(value = "lng")
+      private String longitude;
     }
   }
 
@@ -50,5 +52,4 @@ public class UserDto {
     private String catchPhrase;
     private String bs;
   }
-
 }
