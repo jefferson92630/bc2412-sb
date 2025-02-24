@@ -1,10 +1,9 @@
 package com.bootcamp.demo.demo_sb_customer.codewave;
 
-
 public enum SysCode {
   OK("000000", "Success."),
-  ID_NOT_FOUND("900001", "ID not found"),
-
+  ID_NOT_FOUND("900001", "ID not found."),
+  
   // Pre-handled Runtime Exception
   RTE_NPE("999999", "Null Pointer Exception."),;
 
@@ -18,7 +17,6 @@ public enum SysCode {
   public String getCode() {
     return this.code;
   }
-
   public String getMessage() {
     return this.message;
   }

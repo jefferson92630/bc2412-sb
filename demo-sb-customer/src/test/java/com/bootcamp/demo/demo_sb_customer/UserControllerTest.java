@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -24,7 +25,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(controllers = UserController.class)
-class UserControllerTest {
+public class UserControllerTest {
   @MockBean
   private UserService userService; // 10 method, mock 10 method
 
@@ -34,20 +35,24 @@ class UserControllerTest {
   @Autowired
   private MockMvc mockMvc;
 
-  void TestGetAllUsers() throws Exception {
-
+  @Test
+  void testGetUsers() throws Exception {
     // john
     UserDto.Address.Geo johnGeo = UserDto.Address.Geo.builder().build();
-    UserDto.Address johnAddress = UserDto.Address.builder().geo(johnGeo).build();
+    UserDto.Address johnAddress =
+        UserDto.Address.builder().geo(johnGeo).build();
     UserDto.Company johnCompany = UserDto.Company.builder().build();
-    UserDto john = UserDto.builder().name("John").address(johnAddress).company(johnCompany).build();
+    UserDto john = UserDto.builder().name("John").address(johnAddress)
+        .company(johnCompany).build();
 
     // mary
     UserDto.Address.Geo maryGeo = UserDto.Address.Geo.builder().build();
-    UserDto.Address maryAddress = UserDto.Address.builder().geo(maryGeo).build();
+    UserDto.Address maryAddress =
+        UserDto.Address.builder().geo(maryGeo).build();
     UserDto.Company maryCompany = UserDto.Company.builder().build();
-    UserDto mary = UserDto.builder().name("Mary").address(maryAddress).company(maryCompany).build();
-    
+    UserDto mary = UserDto.builder().name("Mary").address(maryAddress)
+        .company(maryCompany).build();
+
     List<UserDto> userDtos = Arrays.asList(john, mary);
 
     Mockito.when(userService.getUsers()).thenReturn(userDtos);
@@ -58,14 +63,12 @@ class UserControllerTest {
 
     // To check the data:
     String json = result.andReturn().getResponse().getContentAsString();
-
-    List<UserDTO> userDTOs = new ObjectMapper().readValue(json, 
-      new TypeReference<List<UserDTO>>() {});
+    List<UserDTO> userDTOs = new ObjectMapper().readValue(json,
+        new TypeReference<List<UserDTO>>() {});
 
     MatcherAssert.assertThat(userDTOs, Matchers.containsInAnyOrder( //
-      Matchers.hasProperty("name", Matchers.equalTo("John")), //
-      Matchers.hasProperty("name", Matchers.equalTo("Mary")) //
+        Matchers.hasProperty("name", Matchers.equalTo("John")), //
+        Matchers.hasProperty("name", Matchers.equalTo("Mary")) //
     ));
   }
-
 }

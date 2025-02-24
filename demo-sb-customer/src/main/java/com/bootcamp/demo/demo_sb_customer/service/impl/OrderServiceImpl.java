@@ -1,6 +1,5 @@
 package com.bootcamp.demo.demo_sb_customer.service.impl;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bootcamp.demo.demo_sb_customer.codewave.BusinessException;
@@ -28,10 +27,4 @@ public class OrderServiceImpl implements OrderService {
     // Save orderEntity to DB
     return this.orderRepository.save(orderEntity);
   }
-
-  @Override
-  public List<OrderEntity> getOrders() {
-    return this.orderRepository.findAll();
-  }
-
 }

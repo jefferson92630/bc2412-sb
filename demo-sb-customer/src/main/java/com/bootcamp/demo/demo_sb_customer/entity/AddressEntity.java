@@ -16,21 +16,19 @@ import lombok.Setter;
 @Entity
 @Table(name = "Addresses")
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddressEntity {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String street;
   private String suite;
   private String city;
   private String zipcode;
-
-@OneToOne
-@JoinColumn(name = "user_id")
-@Setter
-private UserEntity userEntity;
+  @OneToOne
+  @JoinColumn(name = "user_id")
+  @Setter
+  private UserEntity userEntity;
 }

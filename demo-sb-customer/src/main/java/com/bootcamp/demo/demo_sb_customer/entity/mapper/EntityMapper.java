@@ -11,38 +11,35 @@ import com.bootcamp.demo.demo_sb_customer.model.dto.UserDto;
 public class EntityMapper {
   public UserEntity map(UserDto dto) {
     return UserEntity.builder()
-    .name(dto.getName())
-    .username(dto.getUsername())
-    .email(dto.getEmail())
-    .website(dto.getWebsite())
-    .phone(dto.getPhone())
-    .build();
+      .email(dto.getEmail())
+      .name(dto.getName())
+      .username(dto.getUsername())
+      .website(dto.getWebsite())
+      .phone(dto.getPhone())
+      .build();
   }
 
   public AddressEntity map(UserDto.Address address) {
     return AddressEntity.builder()
-    .street(address.getStreet())
-    .city(address.getCity())
-    .suite(address.getSuite())
-    .zipcode(address.getZipcode())
-    .build();
-  }
-
-  public GeoEntity map(UserDto.Address.Geo geo) {
-    return GeoEntity.builder()
-    .latitude(Double.valueOf(geo.getLatitude()))
-    .longitude(Double.valueOf(geo.getLongitude()))
-    .build();
-  
+      .street(address.getStreet())
+      .city(address.getCity())
+      .suite(address.getSuite())
+      .zipcode(address.getZipcode())
+      .build();
   }
 
   public CompanyEntity map(UserDto.Company company) {
     return CompanyEntity.builder()
-    .name(company.getName())
-    .catchPhrase(company.getCatchPhrase())
-    .bs(company.getBs())
-    .build();
+      .catchPhrase(company.getCatchPhrase())
+      .bs(company.getBs())
+      .name(company.getName())
+      .build();
   }
-    
-}
 
+  public GeoEntity map(UserDto.Address.Geo geo) {
+    return GeoEntity.builder()
+      .latitude(Double.valueOf(geo.getLatitude()))
+      .longitude(Double.valueOf(geo.getLongitude()))
+      .build();
+  }
+}

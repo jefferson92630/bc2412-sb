@@ -28,7 +28,7 @@ public class HelloworldController {
     private int age;
 }
   // An API for Getting Resource
-  @GetMapping(value = "/greeting")
+  @GetMapping(value = "/iphone/greeting")
   public String hello() {
     return "Hello World !";
   }
@@ -70,6 +70,7 @@ public class HelloworldController {
   public List<LocalDate> getDateList() {
     return List.of(LocalDate.of(1989, 6, 4), LocalDate.of(1992, 6, 30));
   }
+
 
  @GetMapping(value = "/shoppingmall")
   public ShoppingMall getShopmall() {

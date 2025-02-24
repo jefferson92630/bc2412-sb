@@ -4,9 +4,8 @@ import org.springframework.stereotype.Component;
 import com.bootcamp.demo.demo_sb_customer.dto.UserDTO;
 import com.bootcamp.demo.demo_sb_customer.model.dto.UserDto;
 
-@Component
-public class UserDTOMapper { 
-  
+@Component // bean
+public class UserDTOMapper {
   // instance method
   public UserDTO map(UserDto dto) {
     // create object
@@ -26,5 +25,4 @@ public class UserDTOMapper {
         .email(dto.getEmail()).username(dto.getUsername()).address(userAddress) //
         .build();
   }
- 
 }

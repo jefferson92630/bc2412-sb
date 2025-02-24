@@ -6,19 +6,27 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 // ! Spring: Convention Over Configuration
 
 // ! Entity (Define Table Structure by Java)
-// ! Hibernate -> rely on provided driver, generate corrsponding SQL (DDL)
-// ! mvn clean install -> test -> create table
+// ! Hibernate -> rely on provided driver, generate corresponding SQL (DDL)
+// ! mvn install -> test -> create table
 // PK, FK, auto_increment, column name, field size
 @Entity
 @Table(name = "Customers")
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
+@EqualsAndHashCode
+@ToString
 public class CustomerEntity {
   @Id // PK
   @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
@@ -27,5 +35,4 @@ public class CustomerEntity {
   private String name;
   @Column(name = "customer_email")
   private String email;
-
 }

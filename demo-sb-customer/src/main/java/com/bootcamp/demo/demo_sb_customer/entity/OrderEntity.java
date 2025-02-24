@@ -1,6 +1,7 @@
 package com.bootcamp.demo.demo_sb_customer.entity;
 
 import java.time.LocalDate;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,10 +21,11 @@ public class OrderEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
   private Long id;
   private Double amount;
+  @Column(name = "order_date")
   private LocalDate orderDate; // Java LocalDate -> Database
 
   // FK
   @ManyToOne
-  @JoinColumn(name = "customer_id") 
+  @JoinColumn(name = "customer_id")
   private CustomerEntity customerEntity;
 }

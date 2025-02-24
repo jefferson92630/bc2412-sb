@@ -1,3 +1,4 @@
+# server.port
 server:
   port: 8100
 
@@ -8,10 +9,22 @@ spring.datasource:
   url: "jdbc:postgresql://localhost:5432/bc2412"
   username: "postgres"
   password: "admin1234"
-
+  
 spring.jpa:
   show-sql: true
   hibernate.ddl-auto: update
+
+# spring.datasource:
+#   platform: h2
+#   url: jdbc:h2:mem:jpademo 
+
+# # JPA Settings
+# spring.jpa:
+#   show-sql: true
+#   hibernate.ddl-auto: create-drop # for development purpose
+
+# # H2 Database Settings
+# spring.h2.console.enabled: true
 
 # Custom Variables
 api:

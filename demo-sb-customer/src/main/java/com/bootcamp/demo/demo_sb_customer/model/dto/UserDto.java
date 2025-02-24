@@ -3,12 +3,13 @@ package com.bootcamp.demo.demo_sb_customer.model.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
-// ! Dto: Data Transfer Object
-
-// This DTO is for deserialization (JSON -> Object)
+// ! Data Transfer Object
+// This DTO is for deserialization (JSON -> OBJECT)
 @Getter
 @Builder
+@ToString
 public class UserDto {
   private Long id;
   private String name;
@@ -19,8 +20,8 @@ public class UserDto {
   private String website;
   private Company company;
 
-@Getter
-@Builder
+  @Getter
+  @Builder
   public static class Address {
     private String street;
     private String suite;

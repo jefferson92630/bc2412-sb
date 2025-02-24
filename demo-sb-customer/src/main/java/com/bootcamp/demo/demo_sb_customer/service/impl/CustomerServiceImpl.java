@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bootcamp.demo.demo_sb_customer.entity.CustomerEntity;
-import com.bootcamp.demo.demo_sb_customer.model.Customer;
 import com.bootcamp.demo.demo_sb_customer.repository.CustomerRepository;
 import com.bootcamp.demo.demo_sb_customer.service.CustomerService;
 
@@ -15,15 +14,21 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Override
   public List<CustomerEntity> getCustomers() {
-    return this.customerRepository.findAll();
-  }
-
-  public List<CustomerEntity> findName(String name) {
-    return this.customerRepository.findByName(CustomerEntity.name);
+    return this.customerRepository.findAll();// john 20, mary 40
   }
 
   @Override
   public CustomerEntity createCustomer(CustomerEntity customerEntity) {
-    return customerRepository.save(customerEntity);
+    return this.customerRepository.save(customerEntity);
+  }
+
+  @Override
+  public List<CustomerEntity> getCustomersByJPQL(String customerName) {
+    return this.customerRepository.findByNameByJPQL(customerName);
+  }
+
+  @Override
+  public List<CustomerEntity> getCustomersByNQ(String customerName) {
+    return this.customerRepository.findByNameByNativeQuery(customerName);
   }
 }

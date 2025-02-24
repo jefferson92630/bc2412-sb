@@ -22,10 +22,10 @@ public class CustomerServiceTest {
   @MockBean
   private CustomerRepository customerRepository;
 
-
   @Test
   void testGetAllCustomers() {
-       CustomerEntity customerEntity1 = CustomerEntity.builder()
+    // Mock behavior for the mock bean
+    CustomerEntity customerEntity1 = CustomerEntity.builder()
         .email("john@gmail.com").name("john").id(1L).build();
     CustomerEntity customerEntity2 = CustomerEntity.builder()
         .email("mary@gmail.com").name("mary").id(2L).build();
@@ -33,20 +33,20 @@ public class CustomerServiceTest {
         Arrays.asList(customerEntity1, customerEntity2);
 
     Mockito.when(customerRepository.findAll()).thenReturn(dbResult);
-
     // test
     List<CustomerEntity> customerEntities = customerService.getCustomers();
-
+    System.out.println("customerEntities=" + customerEntities);
     MatcherAssert.assertThat(customerEntities, Matchers.containsInAnyOrder( //
-      Matchers.hasProperty("name", Matchers.equalTo("John")), //
-      Matchers.hasProperty("name", Matchers.equalTo("Mary"))
+        Matchers.hasProperty("name", Matchers.equalTo("john")), //
+        Matchers.hasProperty("name", Matchers.equalTo("mary"))
     ));
-    
     MatcherAssert.assertThat(customerEntities, Matchers.containsInAnyOrder( //
-      Matchers.hasProperty("id", Matchers.equalTo(1L)), //
-      Matchers.hasProperty("id", Matchers.equalTo(2L))
-  ));
-  
- }
-
+        Matchers.hasProperty("email", Matchers.equalTo("john@gmail.com")), //
+        Matchers.hasProperty("email", Matchers.equalTo("mary@gmail.com")) //
+    ));
+    MatcherAssert.assertThat(customerEntities, Matchers.containsInAnyOrder( //
+        Matchers.hasProperty("id", Matchers.equalTo(2L)), //
+        Matchers.hasProperty("id", Matchers.equalTo(1L)) //
+    ));
+  }
 }

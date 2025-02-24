@@ -33,59 +33,48 @@ public class UserServiceImpl implements UserService {
   private GeoRepository geoRepository;
   @Autowired
   private EntityMapper entityMapper;
-  
-  
+
   @Value("${api.jsonplaceholder.domain}")
   private String domain;
-  
+
   @Value("${api.jsonplaceholder.endpoints.users}")
-  private String userEndpoint;
+  private String usersEndpoint;
 
   @Override
   public List<UserDto> getUsers() {
-   //  String url = "https://jsonplaceholder.typicode.com/users";
-   String url = UriComponentsBuilder.newInstance()
-   .scheme("https")
-   .host(domain)
-   .path(userEndpoint)
-   .build()
-   .toUriString();
+    // String url = "https://jsonplaceholder.typicode.com/users";
+    String url = UriComponentsBuilder.newInstance()
+      .scheme("https")
+      .host(domain)
+      .path(usersEndpoint)
+      .build()
+      .toUriString();
+    System.out.println("url=" + url);
 
-    List<UserDto> userDtos = 
-      Arrays.asList(this.restTemplate.getForObject(url, UserDto[].class));
-
+    List<UserDto> userDtos =
+        Arrays.asList(this.restTemplate.getForObject(url, UserDto[].class));
     // Clear DB
     this.geoRepository.deleteAll();
     this.addressRepository.deleteAll();
     this.companyRepository.deleteAll();
     this.userRepository.deleteAll();
-
+    
     // Save DB (procedures)
     userDtos.stream().forEach(e -> {
-    UserEntity userEntity = this.userRepository.save(this.entityMapper.map(e));
-    
-    AddressEntity addressEntity = this.entityMapper.map(e.getAddress());
-    addressEntity.setUserEntity(userEntity);
-    this.addressRepository.save(addressEntity);
+      UserEntity userEntity = this.userRepository.save(this.entityMapper.map(e));
 
-    CompanyEntity companyEntity = this.entityMapper.map(e.getCompany());
-    companyEntity.setUserEntity(userEntity);
-    this.companyRepository.save(companyEntity);
+      AddressEntity addressEntity = this.entityMapper.map(e.getAddress());
+      addressEntity.setUserEntity(userEntity);
+      this.addressRepository.save(addressEntity);
 
-    GeoEntity geoEntity = this.entityMapper.map(e.getAddress().getGeo());
-    geoEntity.setAddressEntity(addressEntity);
-    this.geoRepository.save(geoEntity);
+      CompanyEntity companyEntity = this.entityMapper.map(e.getCompany());
+      companyEntity.setUserEntity(userEntity);
+      this.companyRepository.save(companyEntity);
 
+      GeoEntity geoEntity = this.entityMapper.map(e.getAddress().getGeo());
+      geoEntity.setAddressEntity(addressEntity);
+      this.geoRepository.save(geoEntity);
     });
     return userDtos;
   }
-
- // Get user info from UserDto class, not save into database
- // @Override
- // public List<UserDto> getUsers() {
- //  String url = "https://jsonplaceholder.typicode.com/users";
- // return Arrays.asList(this.restTemplate.getForObject(url, UserDto[].class));
- // }
-
-
 }

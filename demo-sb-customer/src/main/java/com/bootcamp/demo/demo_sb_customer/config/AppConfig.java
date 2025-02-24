@@ -7,11 +7,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration // bean
 public class AppConfig {
+  // ! More than one methods for creating beans
   @Bean
   BigDecimal bigDecimal() {
-  return BigDecimal.valueOf(10);
- }
-
+    return BigDecimal.valueOf(10);
+  }
   @Bean
   String tutor() {
     return "Vincent";
@@ -21,4 +21,5 @@ public class AppConfig {
   RestTemplate restTemplate() {
     return new RestTemplate();
   }
+  
 }

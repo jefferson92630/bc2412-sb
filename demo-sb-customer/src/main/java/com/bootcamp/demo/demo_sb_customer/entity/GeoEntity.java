@@ -16,7 +16,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "Geo")
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,9 +25,8 @@ public class GeoEntity {
   private Long id;
   private Double latitude;
   private Double longitude;
-
   @OneToOne
-  @JoinColumn (name = "address_id")
+  @JoinColumn(name = "address_id")
   @Setter
   private AddressEntity addressEntity;
 }

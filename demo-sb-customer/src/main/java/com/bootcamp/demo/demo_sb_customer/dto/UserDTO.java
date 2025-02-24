@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 // Features of DTO
 // ! 1. Different numbers of fields for the API
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 // This DTO is for serialization (Object -> JSON)
 @Getter
 @Builder
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
@@ -21,10 +23,11 @@ public class UserDTO {
   private String email;
   private Address address;
 
-@Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+  @Getter
+  @Builder
+  @Setter
+  @AllArgsConstructor
+  @NoArgsConstructor
   public static class Address {
     private String street;
     private String suite;
@@ -34,12 +37,13 @@ public class UserDTO {
 
     @Getter
     @Builder
+    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Geo {
-      @JsonProperty(value = "latitude")
+      @JsonProperty(value = "x")
       private String latitude;
-      @JsonProperty(value = "longitude")
+      @JsonProperty(value = "y")
       private String longitude;
     }
   }
