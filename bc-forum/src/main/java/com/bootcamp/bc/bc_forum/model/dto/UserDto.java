@@ -5,13 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
 public class UserDto {
-  private Long id;
+    private Long id;
   private String name;
   private String username;
   private String email;
@@ -20,10 +19,8 @@ public class UserDto {
   private String website;
   private Company company;
 
-  @Getter
-  @Builder
-  @AllArgsConstructor
-  @NoArgsConstructor
+@Getter
+@Builder
   public static class Address {
     private String street;
     private String suite;
@@ -33,23 +30,18 @@ public class UserDto {
 
     @Getter
     @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
     public static class Geo {
-      @JsonProperty(value = "lat")
-      private String latitude;
-      @JsonProperty(value = "lng")
-      private String longitude;
+      private String lat;
+      private String lng;
     }
   }
 
   @Getter
   @Builder
-  @AllArgsConstructor
-  @NoArgsConstructor
   public static class Company {
     private String name;
     private String catchPhrase;
     private String bs;
   }
+
 }

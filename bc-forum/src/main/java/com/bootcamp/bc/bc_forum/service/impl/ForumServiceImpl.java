@@ -10,10 +10,10 @@ import com.bootcamp.bc.bc_forum.lib.XUriBuilder;
 import com.bootcamp.bc.bc_forum.model.dto.CommentDto;
 import com.bootcamp.bc.bc_forum.model.dto.PostDto;
 import com.bootcamp.bc.bc_forum.model.dto.UserDto;
-import com.bootcamp.bc.bc_forum.service.JPHService;
+import com.bootcamp.bc.bc_forum.service.ForumService;
 
 @Service
-public class JPHServiceImpl implements JPHService {
+public class ForumServiceImpl implements ForumService {
   @Autowired
   private RestTemplate restTemplate;
 
@@ -30,7 +30,7 @@ public class JPHServiceImpl implements JPHService {
   private String commentEndpoint;
 
   @Override
-  public List<UserDto> getJPHUsers() {
+  public List<UserDto> getUsers() {
     String url = XUriBuilder.create() //
         .https() //
         .host(host) //
@@ -40,7 +40,7 @@ public class JPHServiceImpl implements JPHService {
   }
 
   @Override
-  public List<PostDto> getJPHPosts() {
+  public List<PostDto> getPosts() {
     String url = XUriBuilder.create() //
         .https() //
         .host(host) //
@@ -50,7 +50,7 @@ public class JPHServiceImpl implements JPHService {
   }
 
   @Override
-  public List<CommentDto> getJPHComments() {
+  public List<CommentDto> getComments() {
     String url = XUriBuilder.create() //
         .https() //
         .host(host) //
