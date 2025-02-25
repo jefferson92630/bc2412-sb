@@ -1,12 +1,15 @@
 package com.bootcamp.demo.demo_sb_customer.service.impl;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.bootcamp.demo.demo_sb_customer.codewave.RedisManager;
 import com.bootcamp.demo.demo_sb_customer.entity.AddressEntity;
 import com.bootcamp.demo.demo_sb_customer.entity.CompanyEntity;
 import com.bootcamp.demo.demo_sb_customer.entity.GeoEntity;
@@ -18,6 +21,8 @@ import com.bootcamp.demo.demo_sb_customer.repository.CompanyRepository;
 import com.bootcamp.demo.demo_sb_customer.repository.GeoRepository;
 import com.bootcamp.demo.demo_sb_customer.repository.UserRepository;
 import com.bootcamp.demo.demo_sb_customer.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -40,15 +45,22 @@ public class UserServiceImpl implements UserService {
   @Value("${api.jsonplaceholder.endpoints.users}")
   private String usersEndpoint;
 
+  @Autowired
+  private RedisManager redisManager;
+
   @Override
-  public List<UserDto> getUsers() {
+  public List<UserDto> getUsers() throws JsonProcessingException {
+    // Cache Pattern: Read Through
+    // 1. Read Redis first, if found, return users
+    UserDto[] redisData = this.redisManager.get("jph-users", UserDto[].class);
+    // "[{},{},{}]" -> Java Object (Deserialization)
+    if (redisData != null)
+      return Arrays.asList(redisData);
+
+    // 2. if not found, call JPH
     // String url = "https://jsonplaceholder.typicode.com/users";
-    String url = UriComponentsBuilder.newInstance()
-      .scheme("https")
-      .host(domain)
-      .path(usersEndpoint)
-      .build()
-      .toUriString();
+    String url = UriComponentsBuilder.newInstance().scheme("https").host(domain)
+        .path(usersEndpoint).build().toUriString();
     System.out.println("url=" + url);
 
     List<UserDto> userDtos =
@@ -58,10 +70,11 @@ public class UserServiceImpl implements UserService {
     this.addressRepository.deleteAll();
     this.companyRepository.deleteAll();
     this.userRepository.deleteAll();
-    
+
     // Save DB (procedures)
     userDtos.stream().forEach(e -> {
-      UserEntity userEntity = this.userRepository.save(this.entityMapper.map(e));
+      UserEntity userEntity =
+          this.userRepository.save(this.entityMapper.map(e));
 
       AddressEntity addressEntity = this.entityMapper.map(e.getAddress());
       addressEntity.setUserEntity(userEntity);
@@ -75,6 +88,9 @@ public class UserServiceImpl implements UserService {
       geoEntity.setAddressEntity(addressEntity);
       this.geoRepository.save(geoEntity);
     });
+    // 3. Write the users back to redis
+    // Java Object -> "[{},{},{}]" (Serialization)
+    this.redisManager.set("jph-users", userDtos, Duration.ofMinutes(1));
     return userDtos;
   }
 }

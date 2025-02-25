@@ -1,8 +1,10 @@
 package com.bootcamp.demo.demo_sb_customer.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 // ! Data Transfer Object
@@ -10,6 +12,8 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
   private Long id;
   private String name;
@@ -22,6 +26,8 @@ public class UserDto {
 
   @Getter
   @Builder
+  @AllArgsConstructor
+  @NoArgsConstructor
   public static class Address {
     private String street;
     private String suite;
@@ -31,6 +37,8 @@ public class UserDto {
 
     @Getter
     @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Geo {
       @JsonProperty(value = "lat")
       private String latitude;
@@ -41,6 +49,8 @@ public class UserDto {
 
   @Getter
   @Builder
+  @AllArgsConstructor
+  @NoArgsConstructor
   public static class Company {
     private String name;
     private String catchPhrase;

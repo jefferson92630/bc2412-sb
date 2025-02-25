@@ -31,8 +31,8 @@ public class UserDto {
     @Getter
     @Builder
     public static class Geo {
-      private String lat;
-      private String lng;
+      private Double lat;
+      private Double lng;
     }
   }
 

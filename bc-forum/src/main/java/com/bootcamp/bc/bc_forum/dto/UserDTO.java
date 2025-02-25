@@ -36,8 +36,8 @@ public class UserDTO {
     @Builder
     @AllArgsConstructor
     public static class GeoDTO {
-      private String lat;
-      private String lng;
+      private Double lat;
+      private Double lng;
     }
   }
 

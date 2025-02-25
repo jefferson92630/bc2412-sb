@@ -5,3 +5,17 @@ api:
       users: "/users"
       posts: "/posts"
       comments: "/comments"
+
+spring.datasource:
+  driverClassName: "org.postgresql.Driver"
+  url: "jdbc:postgresql://localhost:5432/springexercise"
+  username: "postgres"
+  password: "admin1234"
+
+# # JPA Settings
+spring.jpa:
+   show-sql: true
+   hibernate.ddl-auto: create-drop # for development purpose
+
+# # H2 Database Settings
+spring.h2.console.enabled: true
