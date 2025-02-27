@@ -1,6 +1,5 @@
 package com.bootcamp.bc.bc_forum.entity.mapper;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Component;
 import com.bootcamp.bc.bc_forum.entity.AddressEntity;
 import com.bootcamp.bc.bc_forum.entity.CommentEntity;

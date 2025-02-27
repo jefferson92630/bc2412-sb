@@ -9,24 +9,11 @@
     <version>3.4.2</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.bootcamp.demo</groupId>
-  <artifactId>demo-sb-customer</artifactId>
+  <groupId>com.vtx.cht</groupId>
+  <artifactId>cht-crypto-channel</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>demo-sb-customer</name>
+  <name>cht-crypto-channel</name>
   <description>Demo project for Spring Boot</description>
-  <url />
-  <licenses>
-    <license />
-  </licenses>
-  <developers>
-    <developer />
-  </developers>
-  <scm>
-    <connection />
-    <developerConnection />
-    <tag />
-    <url />
-  </scm>
   <properties>
     <java.version>17</java.version>
   </properties>
@@ -34,13 +21,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <scope>runtime</scope>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -52,21 +32,25 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.13</version>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
+      <groupId>org.modelmapper</groupId>
+      <artifactId>modelmapper</artifactId>
+      <version>3.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
       <scope>runtime</scope>
-    </dependency>
-    <!-- scope=test, means h2 is for Unit test only -->
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>test</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -76,18 +60,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-            </path>
-          </annotationProcessorPaths>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>

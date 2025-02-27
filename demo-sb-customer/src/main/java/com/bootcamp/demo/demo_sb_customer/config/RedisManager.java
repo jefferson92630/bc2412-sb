@@ -1,4 +1,4 @@
-package com.bootcamp.demo.demo_sb_customer.codewave;
+package com.bootcamp.demo.demo_sb_customer.config;
 
 import java.time.Duration;
 import java.util.Objects;
@@ -10,24 +10,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class RedisManager {
   private static final Duration DEFAULT_DURATION = Duration.ofHours(1);
+  
   private RedisTemplate<String, String> redisTemplate;
   private ObjectMapper objectMapper;
 
-  public RedisManager(RedisConnectionFactory factory, ObjectMapper objectMapper) {
+  public RedisManager(RedisConnectionFactory factory,
+      ObjectMapper objectMapper) {
     Objects.requireNonNull(factory);
-    Objects.requireNonNull(objectMapper); // for Spring, may not need to write, but Java need.
+    Objects.requireNonNull(objectMapper);
     this.redisTemplate = new RedisTemplate<>();
-    this.redisTemplate.setConnectionFactory((factory));
+    this.redisTemplate.setConnectionFactory(factory);
     this.redisTemplate.setKeySerializer(RedisSerializer.string());
-    this.redisTemplate.setKeySerializer(RedisSerializer.json());
+    this.redisTemplate.setValueSerializer(RedisSerializer.json());
     this.redisTemplate.afterPropertiesSet();
     this.objectMapper = objectMapper;
   }
 
-  // UserDto userDto = RestTemplate.getForObject(url, UserDto[].class)
+  // UserDto userDto = new RestTemplate().getForObject(url, UserDto.class)
   public <T> T get(String key, Class<T> clazz) throws JsonProcessingException {
     String json = this.redisTemplate.opsForValue().get(key);
-      return json == null ? null : objectMapper.readValue(json, clazz);
+    return json == null ? null : objectMapper.readValue(json, clazz);
   }
 
   public void set(String key, Object object) throws JsonProcessingException {
@@ -35,10 +37,10 @@ public class RedisManager {
     this.redisTemplate.opsForValue().set(key, serializedJson, DEFAULT_DURATION);
   }
 
-  public void set(String key, Object object, Duration duration) throws JsonProcessingException {
+  public void set(String key, Object object, Duration duration)
+      throws JsonProcessingException {
     String serializedJson = objectMapper.writeValueAsString(object);
     this.redisTemplate.opsForValue().set(key, serializedJson, duration);
   }
 
 }
-

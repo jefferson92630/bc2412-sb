@@ -1,5 +1,6 @@
 package com.bootcamp.bc.bc_forum.codewave;
 
+import java.sql.SQLNonTransientConnectionException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -13,10 +14,17 @@ public class GlobalExceptionHandler {
         .build();
   }
 
-  @ExceptionHandler(NullPointerException.class)
-  public ApiResp<Void> handleNullPointerException() {
+  @ExceptionHandler(IllegalArgumentException.class)
+  public ApiResp<Void> handleApiException() {
     return ApiResp.<Void>builder() //
-        .syscode(SysCode.RTE_NPE) //
+        .syscode(SysCode.NOT_AVAIL) //
+        .build();
+  }
+
+  @ExceptionHandler(SQLNonTransientConnectionException.class)
+  public ApiResp<Void> failedConnectDbException() {
+    return ApiResp.<Void>builder() //
+        .syscode(SysCode.NOT_AVAIL) //
         .build();
   }
 }

@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import com.bootcamp.bc.bc_forum.codewave.ApiResp;
 import com.bootcamp.bc.bc_forum.controller.ForumOperation;
 import com.bootcamp.bc.bc_forum.dto.UserCommentDTO;
 import com.bootcamp.bc.bc_forum.dto.UserDTO;
 import com.bootcamp.bc.bc_forum.dto.UserDTO.PostDTO;
 import com.bootcamp.bc.bc_forum.dto.UserDTO.PostDTO.CommentDTO;
+import com.bootcamp.bc.bc_forum.entity.UserEntity;
 import com.bootcamp.bc.bc_forum.exception.UserNotFoundException;
 import com.bootcamp.bc.bc_forum.model.dto.CommentDto;
 import com.bootcamp.bc.bc_forum.model.dto.PostDto;
@@ -17,7 +19,7 @@ import com.bootcamp.bc.bc_forum.model.dto.UserDto;
 import com.bootcamp.bc.bc_forum.service.ForumService;
 
 @RestController
-public class ForumOperationImpl implements ForumOperation {
+public class ForumController implements ForumOperation {
 
   @Autowired
   private ForumService forumService;
@@ -90,6 +92,12 @@ public class ForumOperationImpl implements ForumOperation {
       .filter(u -> u.getId() == uid)
       .map(u -> new UserCommentDTO(u.getId(), u.getUsername(), commentDTOs))
       .collect(Collectors.toList());
+    }
+
+    @Override
+    public ApiResp<UserEntity> getAllUsersFromDb() { 
+      List<UserEntity> serviceResult = this.forumService.getUsers();
+
     }
 
   }
