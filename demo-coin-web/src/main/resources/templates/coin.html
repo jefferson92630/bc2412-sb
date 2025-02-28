@@ -9,6 +9,15 @@
     .decrease {
       color: red;
     }
+    table {
+      width: 40%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
@@ -23,7 +32,7 @@
         <th>ID</th>
         <th>Image</th>
         <th>Current Price (USD)</th>
-        <th>Price Change in 24h</th>
+        <th>Price Change Percentage in 24h</th>
       </tr>
     </thead>
     <tbody>
@@ -45,7 +54,7 @@
         var filter = coinFilter.value.toUpperCase();
 
         coinRows.forEach(function (row) {
-          var coinId = row.querySelector('td:nth-child(2)').textContent.toUpperCase();
+          var coinId = row.querySelector('td:nth-child(1)').textContent.toUpperCase();
 
           if(coinId.indexOf(filter) > -1) {
             row.style.display = ''; // Show the row
